@@ -2,12 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe/constants/routes.dart';
-import 'package:recipe/crud/addPage.dart';
+import 'package:recipe/crud/create_recipe.dart';
 import 'package:recipe/firebase_options.dart';
 import 'package:recipe/home.dart';
 import 'package:recipe/views/loginView.dart';
 import 'package:recipe/views/registerView.dart';
-import 'package:recipe/views/verifyEmailView.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -23,7 +22,6 @@ void main() {
       loginRoute: (context) => const LoginView(),
       registerRoute: (context) => const RegisterView(),
       recipeRoute: (context) => const RecipeUI(),
-      verifyEmailRoute: (context) => const VerifyEmailView(),
       createRecipeRoute: (context) => const CreateRecipe(),
     },
   ));

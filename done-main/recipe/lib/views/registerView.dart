@@ -77,7 +77,7 @@ class _RegisterViewState extends State<RegisterView> {
                   password: password,
                 );
                 writedata(email: email);
-                var user = await storage.collection('Users').doc(email);
+                var user = storage.collection('Users').doc(email);
                 user.set({
                   'email': email,
                   'name': name.text,
