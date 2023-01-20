@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "743418465992",
+    "project_id": "gyalbu-recipe",
+    "storage_bucket": "gyalbu-recipe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743418465992:android:da3eb39691382495e1dffd",
+        "android_client_info": {
+          "package_name": "com.example.recipe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "743418465992-qf7utv5gbgledhq06ecdmtmtdrm1f2v3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzPKHheGwhcK9zFl0N9l_ba2nc_L0YNVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "743418465992-qf7utv5gbgledhq06ecdmtmtdrm1f2v3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
