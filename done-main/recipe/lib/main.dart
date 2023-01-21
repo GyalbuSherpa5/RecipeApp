@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe/constants/routes.dart';
 import 'package:recipe/crud/create_recipe.dart';
-import 'package:recipe/firebase_options.dart';
+import 'package:recipe/views/firebase_options.dart';
 import 'package:recipe/page/bottomNav.dart';
 import 'package:recipe/views/loginView.dart';
 import 'package:recipe/views/registerView.dart';

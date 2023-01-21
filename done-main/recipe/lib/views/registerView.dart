@@ -8,6 +8,8 @@ import 'package:recipe/page/bottomNav.dart';
 import 'package:recipe/utilities/showErrorDialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'customTitle.dart';
+
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
 
@@ -19,6 +21,7 @@ class _RegisterViewState extends State<RegisterView> {
   late final TextEditingController _email;
   late final TextEditingController _password;
   late final TextEditingController name;
+  bool click = true;
 
   @override
   void initState() {
@@ -44,66 +47,140 @@ class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Register')),
-      body: Column(
-        children: [
-          TextField(
-            controller: name,
-            decoration: const InputDecoration(hintText: 'Enter your User name'),
-          ),
-          TextField(
-            controller: _email,
-            enableSuggestions: false,
-            autocorrect: false,
-            keyboardType: TextInputType.emailAddress,
-            decoration:
-                const InputDecoration(hintText: 'Enter your Email here'),
-          ),
-          TextField(
-            controller: _password,
-            obscureText: true,
-            enableSuggestions: false,
-            autocorrect: false,
-            decoration:
-                const InputDecoration(hintText: 'Enter your Password here'),
-          ),
-          TextButton(
-            onPressed: () async {
-              final email = _email.text;
-              final password = _password.text;
-              try {
-                await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                  email: email,
-                  password: password,
-                );
-                writedata(email: email);
-                var user = storage.collection('Users').doc(email);
-                user.set({
-                  'email': email,
-                  'name': name.text,
-                });
-                Navigator.pushReplacement(
+      backgroundColor: Colors.black26,
+      body: Container(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            const Spacer(),
+            const Spacer(),
+            const Spacer(),
+            const CustomTitle(
+              text: 'Sign Up',
+            ),
+            const Spacer(),
+            TextField(
+              controller: name,
+              decoration: InputDecoration(
+                hintText: 'Enter your User name',
+                labelText: 'Your User name',
+                labelStyle: const TextStyle(color: Colors.white),
+                fillColor: Colors.white24,
+                filled: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 27,
+            ),
+            TextField(
+              controller: _email,
+              enableSuggestions: false,
+              autocorrect: false,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                labelText: 'Your E-mail',
+                hintText: 'Enter your email here',
+                labelStyle: const TextStyle(color: Colors.white),
+                fillColor: Colors.white24,
+                filled: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 27,
+            ),
+            TextField(
+              controller: _password,
+              obscureText: click,
+              enableSuggestions: false,
+              autocorrect: false,
+              decoration: InputDecoration(
+                labelText: 'Your Password',
+                hintText: 'Enter your password here',
+                labelStyle: const TextStyle(color: Colors.white),
+                fillColor: Colors.white24,
+                filled: true,
+                suffixIcon: IconButton(
+                  onPressed: () => setState(() {
+                    click = !click;
+                  }),
+                  icon: click
+                      ? const Icon(
+                          Icons.visibility,
+                          color: Colors.white,
+                        )
+                      : const Icon(
+                          Icons.visibility_off,
+                          color: Colors.white,
+                        ),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+            ),
+            const Spacer(),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: Text(
+                'By signing up you agree to our Terms of use and Piracy Policy',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.grey[300],
+                ),
+              ),
+            ),
+            const Spacer(),
+            MaterialButton(
+              minWidth: MediaQuery.of(context).size.width,
+              height: 50,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14)),
+              color: Colors.orange,
+              onPressed: () async {
+                final email = _email.text;
+                final password = _password.text;
+                try {
+                  await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                    email: email,
+                    password: password,
+                  );
+                  writedata(email: email);
+                  var user = storage.collection('Users').doc(email);
+                  user.set({
+                    'email': email,
+                    'name': name.text,
+                  });
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (contexr) => const MainScreen()));
+                } catch (e) {
+                  await showErrorDialog(
                     context,
-                    MaterialPageRoute(
-                        builder: (contexr) => const MainScreen()));
-              } catch (e) {
-                await showErrorDialog(
-                  context,
-                  e.toString(),
-                );
-              }
-            },
-            child: const Text('Register'),
-          ),
-          TextButton(
-              onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                  loginRoute,
-                  (route) => false,
-                );
+                    e.toString(),
+                  );
+                }
               },
-              child: const Text('Already registered? Login here!'))
-        ],
+              child: const Text('Register'),
+            ),
+            const Spacer(),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    loginRoute,
+                    (route) => false,
+                  );
+                },
+                child: const Text('Already have an account? Login here!')),
+            const Spacer()
+          ],
+        ),
       ),
     );
   }

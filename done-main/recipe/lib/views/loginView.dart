@@ -23,7 +23,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   late final TextEditingController _email;
   late final TextEditingController _password;
-  bool click = false;
+  bool click = true;
 
   @override
   void initState() {
