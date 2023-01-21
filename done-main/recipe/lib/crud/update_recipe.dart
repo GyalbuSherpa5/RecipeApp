@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:recipe/constants/routes.dart';
-import 'package:recipe/home.dart';
+import 'package:recipe/page/bottomNav.dart';
 
 class EditRecipe extends StatelessWidget {
   String name;

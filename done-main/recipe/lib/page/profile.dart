@@ -4,9 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe/constants/routes.dart';
+import 'package:recipe/crud/delete.dart';
 import 'package:recipe/main.dart';
-import 'package:recipe/page/Individual_page.dart';
-import 'package:recipe/crud/edit_recipe.dart';
+import 'package:recipe/crud/retrive_recipe.dart';
+import 'package:recipe/crud/update_recipe.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future dataa() async {
@@ -43,6 +44,7 @@ class _ProfileState extends State<Profile> {
           title: const Text('User Profile'),
           actions: [
             PopupMenuButton<MenuAction>(
+              icon: const Icon(Icons.logout_sharp),
               onSelected: (value) async {
                 switch (value) {
                   case MenuAction.logout:
@@ -70,6 +72,7 @@ class _ProfileState extends State<Profile> {
         body: Center(
           child: Column(
             children: [
+              const Text("Welcome User : ", style: TextStyle(fontSize: 30)),
               FutureBuilder(
                   future: dataa(),
                   builder: (context, snap) {
@@ -108,6 +111,12 @@ class _ProfileState extends State<Profile> {
                       },
                     );
                   }),
+              const Spacer(),
+              const Text(
+                "My recipe : ",
+                style: TextStyle(fontSize: 30),
+                textAlign: TextAlign.left,
+              ),
               FutureBuilder(
                   future: dataa(),
                   builder: (context, snap) {
@@ -227,7 +236,7 @@ class _ProfileState extends State<Profile> {
                                                   elevation: 2,
                                                   onSelected: (value) {
                                                     if (value == 1) {
-                                                      _showDialog(
+                                                      DeleteRecipe(
                                                         context,
                                                         title: snapshot.data!
                                                                 .docs[index]
@@ -275,38 +284,12 @@ class _ProfileState extends State<Profile> {
                             }
                           },
                         ));
-                  })
+                  }),
+              const Spacer(),
+              const Spacer(),
+              const Spacer(),
             ],
           ),
         ));
-  }
-
-  _showDialog(BuildContext context, {required String title}) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Do you want to delete your receipe? "),
-          actions: [
-            MaterialButton(
-              child: const Text("No"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            MaterialButton(
-              child: const Text("yes"),
-              onPressed: () {
-                FirebaseFirestore.instance
-                    .collection('recipe')
-                    .doc(title)
-                    .delete();
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 }

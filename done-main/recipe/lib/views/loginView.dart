@@ -49,6 +49,9 @@ class _LoginViewState extends State<LoginView> {
           children: [
             const Spacer(),
             const CustomTitle(
+              text: 'Recipe',
+            ),
+            const CustomTitle(
               text: 'Log In',
             ),
             const Spacer(),

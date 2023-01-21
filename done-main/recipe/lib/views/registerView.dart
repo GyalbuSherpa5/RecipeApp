@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe/constants/routes.dart';
-import 'package:recipe/home.dart';
+import 'package:recipe/page/bottomNav.dart';
 import 'package:recipe/utilities/showErrorDialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
