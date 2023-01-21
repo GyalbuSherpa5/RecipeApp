@@ -130,20 +130,32 @@ class _DashBoardState extends State<DashBoard> {
               });
             },
             children: [
-              Image.asset(
-                'assets/images/1.png',
-                height: 200,
-                fit: BoxFit.cover,
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.4,
+                decoration: const BoxDecoration(
+                    color: Colors.grey,
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/1.jpg'),
+                    )),
               ),
-              Image.asset(
-                'assets/images/3.jpg',
-                height: 200,
-                fit: BoxFit.cover,
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.4,
+                decoration: const BoxDecoration(
+                    color: Colors.grey,
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/2.webp'),
+                    )),
               ),
-              Image.asset(
-                'assets/images/4.jpg',
-                height: 200,
-                fit: BoxFit.cover,
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.4,
+                decoration: const BoxDecoration(
+                    color: Colors.grey,
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/3.jpg'),
+                    )),
               ),
             ],
           ),
