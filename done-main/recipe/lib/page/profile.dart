@@ -71,10 +71,23 @@ class _ProfileState extends State<Profile> {
             )
           ],
         ),
-        body: Center(
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text("Welcome User : ", style: TextStyle(fontSize: 30)),
+              const Spacer(),
+              const Center(
+                child: Text("Welcome User:",
+                    style: TextStyle(
+                      fontFamily: 'CustomFont',
+                      fontSize: 24.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 2.0,
+                      wordSpacing: 4.0,
+                    )),
+              ),
               FutureBuilder(
                   future: dataa(),
                   builder: (context, snap) {
@@ -116,7 +129,14 @@ class _ProfileState extends State<Profile> {
               const Spacer(),
               const Text(
                 "My recipe : ",
-                style: TextStyle(fontSize: 30),
+                style: TextStyle(
+                  fontFamily: 'CustomFont',
+                  fontSize: 24.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2.0,
+                  wordSpacing: 4.0,
+                ),
                 textAlign: TextAlign.left,
               ),
               FutureBuilder(
