@@ -7,7 +7,6 @@ import 'package:recipe/views/firebase_options.dart';
 import 'package:recipe/page/bottomNav.dart';
 import 'package:recipe/views/loginView.dart';
 import 'package:recipe/views/registerView.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
