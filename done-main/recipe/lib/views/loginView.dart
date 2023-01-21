@@ -130,6 +130,7 @@ class _LoginViewState extends State<LoginView> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14)),
               color: Colors.orange,
+              textColor: Colors.white,
               onPressed: () async {
                 final email = _email.text;
                 final password = _password.text;
@@ -167,7 +168,13 @@ class _LoginViewState extends State<LoginView> {
                   );
                 }
               },
-              child: const Text('Login'),
+              child: const Text(
+                'Log In',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2),
+              ),
             ),
             const Spacer(),
             Row(
@@ -186,7 +193,7 @@ class _LoginViewState extends State<LoginView> {
                         (route) => false,
                       );
                     },
-                    child: const Text('Not registered yet? Register'))
+                    child: const Text('Sign Up'))
               ],
             ),
             const Spacer()

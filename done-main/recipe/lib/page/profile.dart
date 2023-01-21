@@ -10,6 +10,8 @@ import 'package:recipe/crud/retrive_recipe.dart';
 import 'package:recipe/crud/update_recipe.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../views/logoutView.dart';
+
 Future dataa() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
   var data = preferences.getString('name');

@@ -142,6 +142,7 @@ class _RegisterViewState extends State<RegisterView> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14)),
               color: Colors.orange,
+              textColor: Colors.white,
               onPressed: () async {
                 final email = _email.text;
                 final password = _password.text;
@@ -167,17 +168,34 @@ class _RegisterViewState extends State<RegisterView> {
                   );
                 }
               },
-              child: const Text('Register'),
+              child: const Text(
+                'Sign up',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2),
+              ),
             ),
             const Spacer(),
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                    loginRoute,
-                    (route) => false,
-                  );
-                },
-                child: const Text('Already have an account? Login here!')),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Already have an account?',
+                  style: TextStyle(
+                    color: Colors.grey[300],
+                  ),
+                ),
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        loginRoute,
+                        (route) => false,
+                      );
+                    },
+                    child: const Text('Login here!')),
+              ],
+            ),
             const Spacer()
           ],
         ),
