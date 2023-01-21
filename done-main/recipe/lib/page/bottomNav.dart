@@ -27,85 +27,88 @@ class _MainScreenState extends State<MainScreen> {
         bucket: bucket,
         child: currentScreen,
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.of(context).pushNamedAndRemoveUntil(
             createRecipeRoute,
             (route) => false,
           );
         },
-        child: const Icon(Icons.add),
+        backgroundColor: Colors.redAccent,
+        icon: const Icon(
+          Icons.food_bank_rounded,
+          size: 50,
+        ),
+        label: const Text(
+          'Create',
+        ),
+        extendedPadding:
+            const EdgeInsets.only(left: 10, right: 10, top: 30, bottom: 30),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
-          shape: const CircularNotchedRectangle(),
           notchMargin: 10,
-          child: SizedBox(
-              height: 60,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        MaterialButton(
-                          onPressed: () {
-                            setState(() {
-                              currentScreen = const DashBoard();
-                              currentTab = 0;
-                            });
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.dashboard,
-                                color:
-                                    currentTab == 0 ? Colors.blue : Colors.grey,
-                              ),
-                              Text('DashBoard',
-                                  style: TextStyle(
-                                      color: currentTab == 0
-                                          ? Colors.blue
-                                          : Colors.grey))
-                            ],
-                          ),
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Colors.black87,
+            ),
+            child: SizedBox(
+                height: 60,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      MaterialButton(
+                        onPressed: () {
+                          setState(() {
+                            currentScreen = const DashBoard();
+                            currentTab = 0;
+                          });
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.dashboard,
+                              color:
+                                  currentTab == 0 ? Colors.blue : Colors.grey,
+                            ),
+                            Text('DashBoard',
+                                style: TextStyle(
+                                    color: currentTab == 0
+                                        ? Colors.blue
+                                        : Colors.grey))
+                          ],
                         ),
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        MaterialButton(
-                          onPressed: () {
-                            setState(() {
-                              currentScreen = const Profile();
-                              currentTab = 4;
-                            });
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.person,
-                                color:
-                                    currentTab == 4 ? Colors.blue : Colors.grey,
-                              ),
-                              Text('Profile',
-                                  style: TextStyle(
-                                      color: currentTab == 4
-                                          ? Colors.blue
-                                          : Colors.grey))
-                            ],
-                          ),
+                      ),
+                      MaterialButton(
+                        onPressed: () {
+                          setState(() {
+                            currentScreen = const Profile();
+                            currentTab = 4;
+                          });
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.person,
+                              color:
+                                  currentTab == 4 ? Colors.blue : Colors.grey,
+                            ),
+                            Text('Profile',
+                                style: TextStyle(
+                                    color: currentTab == 4
+                                        ? Colors.blue
+                                        : Colors.grey))
+                          ],
                         ),
-                      ],
-                    )
-                  ],
-                ),
-              ))),
+                      )
+                    ],
+                  ),
+                )),
+          )),
     );
   }
 }
