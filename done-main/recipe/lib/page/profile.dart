@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe/constants/routes.dart';
 import 'package:recipe/crud/delete.dart';
-import 'package:recipe/main.dart';
 import 'package:recipe/crud/retrive_recipe.dart';
 import 'package:recipe/crud/update_recipe.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,6 +43,7 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('User Profile'),
+          backgroundColor: const Color.fromARGB(255, 25, 154, 193),
           actions: [
             PopupMenuButton<MenuAction>(
               icon: const Icon(Icons.logout_sharp),
@@ -77,12 +77,9 @@ class _ProfileState extends State<Profile> {
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [
+                Colors.teal,
                 Colors.blue,
-                Colors.grey,
-                Colors.redAccent,
-                Colors.grey,
-                Colors.blue,
-                Colors.grey,
+                Colors.teal,
               ],
             ),
           ),

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe/constants/routes.dart';
 import 'package:recipe/page/bottomNav.dart';
 import 'package:recipe/utilities/showErrorDialog.dart';
+import 'package:recipe/views/loginView.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'customTitle.dart';
@@ -128,7 +129,7 @@ class _RegisterViewState extends State<RegisterView> {
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.8,
               child: Text(
-                'By signing up you agree to our Terms of use and Piracy Policy',
+                'By signing up you agree to our Terms of use and Pirvacy Policy',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.grey[300],
@@ -160,7 +161,7 @@ class _RegisterViewState extends State<RegisterView> {
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (contexr) => const MainScreen()));
+                          builder: (contexr) => const LoginView()));
                 } catch (e) {
                   await showErrorDialog(
                     context,

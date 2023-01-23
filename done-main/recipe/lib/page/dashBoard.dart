@@ -17,11 +17,10 @@ class _DashBoardState extends State<DashBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blueGrey,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: const Text('Dashboard'),
-          backgroundColor: Colors.black12,
+          backgroundColor: const Color.fromARGB(255, 25, 154, 193),
         ),
         body: Container(
           decoration: const BoxDecoration(
@@ -29,19 +28,18 @@ class _DashBoardState extends State<DashBoard> {
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [
+                Colors.teal,
                 Colors.blue,
-                Colors.grey,
-                Colors.redAccent,
-                Colors.grey,
-                Colors.blue,
-                Colors.grey,
-                Colors.grey,
+                Colors.teal,
               ],
             ),
           ),
           child: ListView(
             children: [
               custompageView(context),
+              const SizedBox(
+                height: 20,
+              ),
               const SizedBox(
                 height: 50,
                 child: Padding(
@@ -57,6 +55,9 @@ class _DashBoardState extends State<DashBoard> {
                         wordSpacing: 4.0,
                       )),
                 ),
+              ),
+              const SizedBox(
+                height: 20,
               ),
               StreamBuilder(
                 stream:

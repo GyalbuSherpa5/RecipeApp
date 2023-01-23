@@ -171,7 +171,7 @@ class _LoginViewState extends State<LoginView> {
               child: const Text(
                 'Log In',
                 style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2),
               ),
@@ -184,16 +184,23 @@ class _LoginViewState extends State<LoginView> {
                   'Don\'t have an account ? ',
                   style: TextStyle(
                     color: Colors.grey[300],
+                    fontSize: 15,
                   ),
                 ),
                 TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        registerRoute,
-                        (route) => false,
-                      );
-                    },
-                    child: const Text('Sign Up'))
+                  onPressed: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      registerRoute,
+                      (route) => false,
+                    );
+                  },
+                  child: const Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                )
               ],
             ),
             const Spacer()

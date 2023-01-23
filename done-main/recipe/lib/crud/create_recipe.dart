@@ -60,252 +60,274 @@ class _MyAddPageState extends State<MyAddPage> {
     CommonThings.size = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: ListView(
-        padding: const EdgeInsets.all(8),
-        children: <Widget>[
-          Form(
-            // key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    // ignore: unnecessary_new
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Colors.teal,
+              Colors.blue,
+              Colors.teal,
+            ],
+          ),
+        ),
+        child: ListView(
+          padding: const EdgeInsets.all(8),
+          children: <Widget>[
+            Form(
+              // key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      // ignore: unnecessary_new
 
-                    //image
-                    new Container(
-                      height: 200.0,
-                      width: 200.0,
-                      decoration: new BoxDecoration(
-                        border: new Border.all(color: Colors.blueAccent),
-                      ),
-                      padding: const EdgeInsets.all(5.0),
-                      child: image == null
-                          ? Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height * 0.4,
-                              decoration: const BoxDecoration(
-                                  color: Colors.grey,
-                                  image: DecorationImage(
-                                    image:
-                                        AssetImage('assets/images/user1.png'),
-                                  )),
-                            )
-                          : Container(
-                              color: Colors.grey,
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height * 0.4,
-                              child: Expanded(
-                                child: Image.file(
-                                  File(image!.path),
-                                  fit: BoxFit.cover,
+                      //image
+                      new Container(
+                        height: 200.0,
+                        width: 200.0,
+                        decoration: new BoxDecoration(
+                          border: new Border.all(color: Colors.blueAccent),
+                        ),
+                        padding: const EdgeInsets.all(5.0),
+                        child: image == null
+                            ? Container(
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.4,
+                                decoration: const BoxDecoration(
+                                    color: Colors.grey,
+                                    image: DecorationImage(
+                                      image:
+                                          AssetImage('assets/images/user1.png'),
+                                    )),
+                              )
+                            : Container(
+                                color: Colors.grey,
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.4,
+                                child: Expanded(
+                                  child: Image.file(
+                                    File(image!.path),
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
-                            ),
-                    ),
-                    const Divider(),
-                    new IconButton(
-                      icon: const Icon(Icons.camera_alt),
-                      onPressed: () async {
-                        final ImagePicker picker = ImagePicker();
-                        final img =
-                            await picker.pickImage(source: ImageSource.camera);
-                        setState(() {
-                          image = img;
-                        });
-                      },
-                    ),
-                    const Divider(),
-                    new IconButton(
-                      icon: const Icon(Icons.image),
-                      onPressed: () async {
-                        final ImagePicker picker = ImagePicker();
-                        final img =
-                            await picker.pickImage(source: ImageSource.gallery);
-                        setState(() {
-                          image = img;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 10),
-                  child: Text('Recipe Name',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                ),
+                      ),
+                      const Divider(),
+                      new IconButton(
+                        icon: const Icon(Icons.camera_alt),
+                        onPressed: () async {
+                          final ImagePicker picker = ImagePicker();
+                          final img = await picker.pickImage(
+                              source: ImageSource.camera);
+                          setState(() {
+                            image = img;
+                          });
+                        },
+                      ),
+                      const Divider(),
+                      new IconButton(
+                        icon: const Icon(Icons.image),
+                        onPressed: () async {
+                          final ImagePicker picker = ImagePicker();
+                          final img = await picker.pickImage(
+                              source: ImageSource.gallery);
+                          setState(() {
+                            image = img;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 18.0, horizontal: 10),
+                    child: Text('Recipe Name',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18)),
+                  ),
 //name
-                TextFormField(
-                  controller: name,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: ' Recipe Name',
-                    fillColor: Colors.grey[300],
-                    filled: true,
+                  TextFormField(
+                    controller: name,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: ' Recipe Name',
+                      fillColor: Colors.grey[300],
+                      filled: true,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 10),
-                  child: Text('Description',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                ),
-                //description
-                TextFormField(
-                  controller: des,
-                  maxLines: 10,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Description',
-                    fillColor: Colors.grey[300],
-                    filled: true,
+                  const SizedBox(
+                    height: 20,
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 10),
-                  child: Text('Cooking Time',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                ),
-                //cooking time
-                TextFormField(
-                  controller: time,
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Cooking time',
-                    fillColor: Colors.grey[300],
-                    filled: true,
+                  const Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 18.0, horizontal: 10),
+                    child: Text('Description',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18)),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 10),
-                  child: Text('Ingredients',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                ),
-                //Ingredients
-                TextFormField(
-                  controller: ing,
-                  maxLines: 4,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Ingredients',
-                    fillColor: Colors.grey[300],
-                    filled: true,
+                  //description
+                  TextFormField(
+                    controller: des,
+                    maxLines: 10,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Description',
+                      fillColor: Colors.grey[300],
+                      filled: true,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 10),
-                  child: Text('Steps',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                ),
-                //Steps
-                TextFormField(
-                  maxLines: 4,
-                  controller: step,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Steps',
-                    fillColor: Colors.grey[300],
-                    filled: true,
+                  const SizedBox(
+                    height: 20,
                   ),
-                ),
-              ],
+                  const Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 18.0, horizontal: 10),
+                    child: Text('Cooking Time',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18)),
+                  ),
+                  //cooking time
+                  TextFormField(
+                    controller: time,
+                    maxLines: 1,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Cooking time',
+                      fillColor: Colors.grey[300],
+                      filled: true,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 18.0, horizontal: 10),
+                    child: Text('Ingredients',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18)),
+                  ),
+                  //Ingredients
+                  TextFormField(
+                    controller: ing,
+                    maxLines: 4,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Ingredients',
+                      fillColor: Colors.grey[300],
+                      filled: true,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 18.0, horizontal: 10),
+                    child: Text('Steps',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18)),
+                  ),
+                  //Steps
+                  TextFormField(
+                    maxLines: 4,
+                    controller: step,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Steps',
+                      fillColor: Colors.grey[300],
+                      filled: true,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              FutureBuilder(
-                  future: dataa(),
-                  builder: (context, snap) {
-                    var cc = snap.data.toString();
-                    return ElevatedButton(
-                      onPressed: () async {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: const Text('Created Successfully'),
-                                content: InkWell(
-                                    onTap: () {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 20, vertical: 5),
-                                            child: const Text(
-                                                'Created successfully'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                FutureBuilder(
+                    future: dataa(),
+                    builder: (context, snap) {
+                      var cc = snap.data.toString();
+                      return ElevatedButton(
+                        onPressed: () async {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Created Successfully'),
+                                  content: InkWell(
+                                      onTap: () {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 20,
+                                                      vertical: 5),
+                                              child: const Text(
+                                                  'Created successfully'),
+                                            ),
+                                            backgroundColor: Colors.green,
+                                            behavior: SnackBarBehavior.floating,
                                           ),
-                                          backgroundColor: Colors.green,
-                                          behavior: SnackBarBehavior.floating,
-                                        ),
-                                      );
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const MainScreen()));
-                                    },
-                                    child: const Text(
-                                      'Done',
-                                      textAlign: TextAlign.right,
-                                    )),
-                              );
-                            });
-                        FirebaseFirestore.instance
-                            .collection('recipe')
-                            .doc(name.text)
-                            .set({
-                          'name': name.text,
-                          'des': des.text,
-                          'email': cc,
-                          'time': time.text,
-                          'ingredients': ing.text,
-                          'step': step.text,
-                          'image': ''
-                        });
-                        UploadTask? uploadTask;
-                        var ref = FirebaseStorage.instance
-                            .ref()
-                            .child('recipe')
-                            .child(name.text);
-                        ref.putFile(File(image!.path));
-                        uploadTask = ref.putFile(File(image!.path));
-                        final snap = await uploadTask.whenComplete(() {});
-                        final urls = await snap.ref.getDownloadURL();
-                        var user = FirebaseFirestore.instance
-                            .collection('recipe')
-                            .doc(name.text);
-                        await user.update({'image': urls});
-                      },
-                      child: const Text('Create',
-                          style: TextStyle(color: Colors.white)),
-                    );
-                  }),
-            ],
-          )
-        ],
+                                        );
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const MainScreen()));
+                                      },
+                                      child: const Text(
+                                        'Done',
+                                        textAlign: TextAlign.right,
+                                      )),
+                                );
+                              });
+                          FirebaseFirestore.instance
+                              .collection('recipe')
+                              .doc(name.text)
+                              .set({
+                            'name': name.text,
+                            'des': des.text,
+                            'email': cc,
+                            'time': time.text,
+                            'ingredients': ing.text,
+                            'step': step.text,
+                            'image': ''
+                          });
+                          UploadTask? uploadTask;
+                          var ref = FirebaseStorage.instance
+                              .ref()
+                              .child('recipe')
+                              .child(name.text);
+                          ref.putFile(File(image!.path));
+                          uploadTask = ref.putFile(File(image!.path));
+                          final snap = await uploadTask.whenComplete(() {});
+                          final urls = await snap.ref.getDownloadURL();
+                          var user = FirebaseFirestore.instance
+                              .collection('recipe')
+                              .doc(name.text);
+                          await user.update({'image': urls});
+                        },
+                        child: const Text('Create',
+                            style: TextStyle(color: Colors.white)),
+                      );
+                    }),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

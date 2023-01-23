@@ -34,7 +34,7 @@ class _MainScreenState extends State<MainScreen> {
             (route) => false,
           );
         },
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.green,
         icon: const Icon(
           Icons.food_bank_rounded,
           size: 50,
@@ -72,12 +72,12 @@ class _MainScreenState extends State<MainScreen> {
                             Icon(
                               Icons.dashboard,
                               color:
-                                  currentTab == 0 ? Colors.blue : Colors.grey,
+                                  currentTab == 0 ? Colors.teal : Colors.grey,
                             ),
                             Text('DashBoard',
                                 style: TextStyle(
                                     color: currentTab == 0
-                                        ? Colors.blue
+                                        ? Colors.teal[600]
                                         : Colors.grey))
                           ],
                         ),
@@ -86,7 +86,7 @@ class _MainScreenState extends State<MainScreen> {
                         onPressed: () {
                           setState(() {
                             currentScreen = const Profile();
-                            currentTab = 4;
+                            currentTab = 1;
                           });
                         },
                         child: Column(
@@ -95,12 +95,12 @@ class _MainScreenState extends State<MainScreen> {
                             Icon(
                               Icons.person,
                               color:
-                                  currentTab == 4 ? Colors.blue : Colors.grey,
+                                  currentTab == 1 ? Colors.teal : Colors.grey,
                             ),
                             Text('Profile',
                                 style: TextStyle(
-                                    color: currentTab == 4
-                                        ? Colors.blue
+                                    color: currentTab == 1
+                                        ? Colors.teal[600]
                                         : Colors.grey))
                           ],
                         ),
