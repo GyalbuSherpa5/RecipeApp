@@ -19,7 +19,13 @@ class _DashBoardState extends State<DashBoard> {
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const Text('Dashboard'),
+          title: const Text(
+            'Dashboard',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
           backgroundColor: const Color.fromARGB(255, 25, 154, 193),
         ),
         body: Container(

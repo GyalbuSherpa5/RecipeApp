@@ -42,9 +42,20 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('User Profile'),
+          title: const Text(
+            'User Profile',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          ),
           backgroundColor: const Color.fromARGB(255, 25, 154, 193),
           actions: [
+            const Center(
+                child: Text(
+              "Sign Out",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
+            )),
             PopupMenuButton<MenuAction>(
               icon: const Icon(Icons.logout_sharp),
               onSelected: (value) async {
@@ -64,7 +75,13 @@ class _ProfileState extends State<Profile> {
                 return const [
                   PopupMenuItem<MenuAction>(
                     value: MenuAction.logout,
-                    child: Text('Log out'),
+                    child: Text(
+                      'Sign out',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Colors.black),
+                    ),
                   ),
                 ];
               },

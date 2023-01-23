@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:recipe/constants/routes.dart';
 import 'package:recipe/utilities/showErrorDialog.dart';
-import 'package:recipe/views/customTitle.dart';
+import 'package:recipe/model/customTitle.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future writedata({required String email}) async {

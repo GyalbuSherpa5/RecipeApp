@@ -90,6 +90,33 @@ class IndividualPage extends StatelessWidget {
                     ],
                   ),
 
+                  //time
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(18, 0, 10, 10),
+                        child: Text(
+                          'Cooking time',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(5, 0, 10, 15),
+                        child: Text(
+                          time,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.black),
+                        ),
+                      ),
+                    ],
+                  ),
                   //des
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -120,35 +147,6 @@ class IndividualPage extends StatelessWidget {
                       ),
                     ],
                   ),
-
-                  //time
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(18.0),
-                        child: Text(
-                          'Cooking time',
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 18, 10, 10),
-                        child: Text(
-                          time,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.black),
-                        ),
-                      ),
-                    ],
-                  ),
-
                   //ingredients
 
                   Row(

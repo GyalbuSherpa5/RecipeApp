@@ -28,18 +28,6 @@ class EditRecipe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-              recipeRoute,
-              (route) => false,
-            );
-          },
-        ),
-        title: const Text('Update Recipe'),
-      ),
       body: MyAddPage(
           des: des,
           time: time,
@@ -88,6 +76,19 @@ class _MyAddPageState extends State<MyAddPage> {
     TextEditingController ing = TextEditingController(text: widget.ingredients);
     TextEditingController step = TextEditingController(text: widget.step);
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              recipeRoute,
+              (route) => false,
+            );
+          },
+        ),
+        title: const Text('Update Recipe'),
+        backgroundColor: const Color.fromARGB(255, 25, 154, 193),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -101,7 +102,7 @@ class _MyAddPageState extends State<MyAddPage> {
           ),
         ),
         child: ListView(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(18),
           children: <Widget>[
             Form(
               // key: _formKey,
@@ -289,80 +290,82 @@ class _MyAddPageState extends State<MyAddPage> {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: () async {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text('Updated Successfully'),
-                            content: InkWell(
-                                onTap: () {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 5),
-                                        child:
-                                            const Text('Updated successfully'),
-                                      ),
-                                      backgroundColor: Colors.green,
-                                      behavior: SnackBarBehavior.floating,
-                                    ),
-                                  );
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const MainScreen()));
-                                },
-                                child: const Text(
-                                  'Done',
-                                  textAlign: TextAlign.right,
-                                )),
-                          );
-                        });
-
-                    FirebaseFirestore.instance
-                        .collection('recipe')
-                        .doc(name.text)
-                        .update({
-                      'name': name.text,
-                      'des': des.text,
-                      'time': time.text,
-                      'ingredients': ing.text,
-                      'step': step.text,
-                    });
-                    UploadTask? uploadTask;
-                    var ref = FirebaseStorage.instance
-                        .ref()
-                        .child('recipe')
-                        .child(name.text);
-                    ref.putFile(File(image!.path));
-                    uploadTask = ref.putFile(File(image!.path));
-                    final snap = await uploadTask.whenComplete(() {});
-                    final urls = await snap.ref.getDownloadURL();
-
-                    var user = FirebaseFirestore.instance
-                        .collection('recipe')
-                        .doc(name.text);
-                    image == null
-                        ? widget.image.isEmpty
-                            ? await user.update({'image': ''})
-                            : await user.update({'image': widget.image})
-                        : await user.update({'image': urls});
-                  },
-                  child: const Text('update',
-                      style: TextStyle(color: Colors.white)),
-                ),
-              ],
-            )
+            const SizedBox(
+              height: 30,
+            ),
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () async {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text('Updated Successfully'),
+                  content: InkWell(
+                      onTap: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              child: const Text('Updated successfully'),
+                            ),
+                            backgroundColor: Colors.green,
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MainScreen()));
+                      },
+                      child: const Text(
+                        'Done',
+                        textAlign: TextAlign.right,
+                      )),
+                );
+              });
+
+          FirebaseFirestore.instance
+              .collection('recipe')
+              .doc(name.text)
+              .update({
+            'name': name.text,
+            'des': des.text,
+            'time': time.text,
+            'ingredients': ing.text,
+            'step': step.text,
+          });
+          UploadTask? uploadTask;
+          var ref =
+              FirebaseStorage.instance.ref().child('recipe').child(name.text);
+          ref.putFile(File(image!.path));
+          uploadTask = ref.putFile(File(image!.path));
+          final snap = await uploadTask.whenComplete(() {});
+          final urls = await snap.ref.getDownloadURL();
+
+          var user =
+              FirebaseFirestore.instance.collection('recipe').doc(name.text);
+          image == null
+              ? widget.image.isEmpty
+                  ? await user.update({'image': ''})
+                  : await user.update({'image': widget.image})
+              : await user.update({'image': urls});
+        },
+        backgroundColor: Colors.green,
+        icon: const Icon(
+          Icons.update,
+          size: 30,
+        ),
+        label: const Text(
+          'Update',
+        ),
+        extendedPadding:
+            const EdgeInsets.only(left: 10, right: 10, top: 30, bottom: 30),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
     );
   }
 }

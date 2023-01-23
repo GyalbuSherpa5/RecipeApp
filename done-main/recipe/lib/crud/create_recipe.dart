@@ -17,20 +17,8 @@ class CreateRecipe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-              recipeRoute,
-              (route) => false,
-            );
-          },
-        ),
-        title: const Text('Create Recipe'),
-      ),
-      body: const MyAddPage(),
+    return const Scaffold(
+      body: MyAddPage(),
     );
   }
 }
@@ -60,6 +48,94 @@ class _MyAddPageState extends State<MyAddPage> {
     CommonThings.size = MediaQuery.of(context).size;
 
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pushNamedAndRemoveUntil(
+              recipeRoute,
+              (route) => false,
+            );
+          },
+        ),
+        title: const Text('Create Recipe'),
+        backgroundColor: const Color.fromARGB(255, 25, 154, 193),
+        actions: [
+          FutureBuilder(
+              future: dataa(),
+              builder: (context, snap) {
+                var cc = snap.data.toString();
+                return Transform.scale(
+                  scale: 0.8,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green, // Background color
+                    ),
+                    onPressed: () async {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text('Created Successfully'),
+                              content: InkWell(
+                                  onTap: () {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 5),
+                                          child: const Text(
+                                              'Created successfully'),
+                                        ),
+                                        backgroundColor: Colors.green,
+                                        behavior: SnackBarBehavior.floating,
+                                      ),
+                                    );
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const MainScreen()));
+                                  },
+                                  child: const Text(
+                                    'Done',
+                                    textAlign: TextAlign.right,
+                                  )),
+                            );
+                          });
+                      FirebaseFirestore.instance
+                          .collection('recipe')
+                          .doc(name.text)
+                          .set({
+                        'name': name.text,
+                        'des': des.text,
+                        'email': cc,
+                        'time': time.text,
+                        'ingredients': ing.text,
+                        'step': step.text,
+                        'image': ''
+                      });
+                      UploadTask? uploadTask;
+                      var ref = FirebaseStorage.instance
+                          .ref()
+                          .child('recipe')
+                          .child(name.text);
+                      ref.putFile(File(image!.path));
+                      uploadTask = ref.putFile(File(image!.path));
+                      final snap = await uploadTask.whenComplete(() {});
+                      final urls = await snap.ref.getDownloadURL();
+                      var user = FirebaseFirestore.instance
+                          .collection('recipe')
+                          .doc(name.text);
+                      await user.update({'image': urls});
+                    },
+                    child: const Text('Create',
+                        style: TextStyle(color: Colors.white, fontSize: 20)),
+                  ),
+                );
+              })
+        ],
+      ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -73,7 +149,7 @@ class _MyAddPageState extends State<MyAddPage> {
           ),
         ),
         child: ListView(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(18),
           children: <Widget>[
             Form(
               // key: _formKey,
@@ -251,80 +327,8 @@ class _MyAddPageState extends State<MyAddPage> {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                FutureBuilder(
-                    future: dataa(),
-                    builder: (context, snap) {
-                      var cc = snap.data.toString();
-                      return ElevatedButton(
-                        onPressed: () async {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: const Text('Created Successfully'),
-                                  content: InkWell(
-                                      onTap: () {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Container(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 20,
-                                                      vertical: 5),
-                                              child: const Text(
-                                                  'Created successfully'),
-                                            ),
-                                            backgroundColor: Colors.green,
-                                            behavior: SnackBarBehavior.floating,
-                                          ),
-                                        );
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const MainScreen()));
-                                      },
-                                      child: const Text(
-                                        'Done',
-                                        textAlign: TextAlign.right,
-                                      )),
-                                );
-                              });
-                          FirebaseFirestore.instance
-                              .collection('recipe')
-                              .doc(name.text)
-                              .set({
-                            'name': name.text,
-                            'des': des.text,
-                            'email': cc,
-                            'time': time.text,
-                            'ingredients': ing.text,
-                            'step': step.text,
-                            'image': ''
-                          });
-                          UploadTask? uploadTask;
-                          var ref = FirebaseStorage.instance
-                              .ref()
-                              .child('recipe')
-                              .child(name.text);
-                          ref.putFile(File(image!.path));
-                          uploadTask = ref.putFile(File(image!.path));
-                          final snap = await uploadTask.whenComplete(() {});
-                          final urls = await snap.ref.getDownloadURL();
-                          var user = FirebaseFirestore.instance
-                              .collection('recipe')
-                              .doc(name.text);
-                          await user.update({'image': urls});
-                        },
-                        child: const Text('Create',
-                            style: TextStyle(color: Colors.white)),
-                      );
-                    }),
-              ],
+            const SizedBox(
+              height: 30,
             )
           ],
         ),
