@@ -41,8 +41,6 @@ class _MyAddPageState extends State<MyAddPage> {
   TextEditingController time = TextEditingController();
   TextEditingController ing = TextEditingController();
   TextEditingController step = TextEditingController();
-  // TextEditingController nameInputController;
-  // TextEditingController imageInputController;
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +75,9 @@ class _MyAddPageState extends State<MyAddPage> {
                     ),
                     onPressed: () async {
                       try {
+                        if (name.text.isEmpty) {
+                          throw Exception("name is not provided");
+                        }
                         FirebaseFirestore.instance
                             .collection('recipe')
                             .doc(name.text)
@@ -89,19 +90,15 @@ class _MyAddPageState extends State<MyAddPage> {
                           'step': step.text,
                           'image': ''
                         });
-                        UploadTask? uploadTask;
-                        var ref = FirebaseStorage.instance
-                            .ref()
-                            .child('recipe')
-                            .child(name.text);
-                        ref.putFile(File(image!.path));
-                        uploadTask = ref.putFile(File(image!.path));
-                        final snap = await uploadTask.whenComplete(() {});
-                        final urls = await snap.ref.getDownloadURL();
-                        var user = FirebaseFirestore.instance
-                            .collection('recipe')
-                            .doc(name.text);
-                        await user.update({'image': urls});
+                      } on Exception catch (e) {
+                        if (e.toString().contains("name is not provided")) {
+                          showErrorDialog(
+                            context,
+                            "Recipe Name is not provided!",
+                          );
+                        }
+                      }
+                      if (name.text.isNotEmpty) {
                         showDialog(
                             context: context,
                             builder: (context) {
@@ -136,11 +133,19 @@ class _MyAddPageState extends State<MyAddPage> {
                                     )),
                               );
                             });
-                      } catch (e) {
-                        showErrorDialog(
-                          context,
-                          'Image and Text field cannot be empty',
-                        );
+                        UploadTask? uploadTask;
+                        var ref = FirebaseStorage.instance
+                            .ref()
+                            .child('recipe')
+                            .child(name.text);
+                        ref.putFile(File(image!.path));
+                        uploadTask = ref.putFile(File(image!.path));
+                        final snap = await uploadTask.whenComplete(() {});
+                        final urls = await snap.ref.getDownloadURL();
+                        var user = FirebaseFirestore.instance
+                            .collection('recipe')
+                            .doc(name.text);
+                        await user.update({'image': urls});
                       }
                     },
                     child: const Text('Create',
@@ -191,8 +196,8 @@ class _MyAddPageState extends State<MyAddPage> {
                                 decoration: const BoxDecoration(
                                     color: Colors.grey,
                                     image: DecorationImage(
-                                      image:
-                                          AssetImage('assets/images/user1.png'),
+                                      image: AssetImage(
+                                          'assets/images/recipeFoto.jpg'),
                                     )),
                               )
                             : Container(
