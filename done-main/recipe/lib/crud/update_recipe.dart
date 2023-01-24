@@ -309,17 +309,19 @@ class _MyAddPageState extends State<MyAddPage> {
                           SnackBar(
                             content: Container(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 5),
+                                  horizontal: 15, vertical: 5),
                               child: const Text('Updated successfully'),
                             ),
+                            duration:
+                                const Duration(seconds: 0, milliseconds: 500),
                             backgroundColor: Colors.green,
                             behavior: SnackBarBehavior.floating,
                           ),
                         );
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MainScreen()));
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                          recipeRoute,
+                          (route) => false,
+                        );
                       },
                       child: const Text(
                         'Done',
