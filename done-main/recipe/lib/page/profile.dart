@@ -151,7 +151,19 @@ class _ProfileState extends State<Profile> {
                                   }),
                             );
                           } else {
-                            return const Text('no data found');
+                            return const Center(
+                              child: Text(
+                                'No user found',
+                                style: TextStyle(
+                                  fontFamily: 'CustomFont',
+                                  fontSize: 24.0,
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 2.0,
+                                  wordSpacing: 4.0,
+                                ),
+                              ),
+                            );
                           }
                         },
                       );
@@ -263,7 +275,15 @@ class _ProfileState extends State<Profile> {
                                                         value: 1,
                                                         child: Row(
                                                           children: const [
-                                                            Icon(Icons.delete),
+                                                            Icon(
+                                                              Icons.delete,
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      240,
+                                                                      112,
+                                                                      103),
+                                                            ),
                                                             SizedBox(
                                                               width: 10,
                                                             ),
@@ -276,7 +296,11 @@ class _ProfileState extends State<Profile> {
                                                         value: 2,
                                                         child: Row(
                                                           children: const [
-                                                            Icon(Icons.edit),
+                                                            Icon(
+                                                              Icons.edit,
+                                                              color:
+                                                                  Colors.blue,
+                                                            ),
                                                             SizedBox(
                                                               width: 10,
                                                             ),
@@ -335,7 +359,17 @@ class _ProfileState extends State<Profile> {
                                       );
                                     });
                               } else {
-                                return const Text('no data found');
+                                return const Text(
+                                  'Please create some recipe',
+                                  style: TextStyle(
+                                    fontFamily: 'CustomFont',
+                                    fontSize: 24.0,
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 2.0,
+                                    wordSpacing: 4.0,
+                                  ),
+                                );
                               }
                             },
                           ));

@@ -6,7 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:recipe/constants/routes.dart';
-import 'package:recipe/page/bottomNav.dart';
 
 class EditRecipe extends StatelessWidget {
   String name;
@@ -305,32 +304,31 @@ class _MyAddPageState extends State<MyAddPage> {
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  title: const Text('Updated Successfully'),
-                  content: InkWell(
-                      onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 5),
-                              child: const Text('Updated successfully'),
-                            ),
-                            duration:
-                                const Duration(seconds: 0, milliseconds: 500),
-                            backgroundColor: Colors.green,
-                            behavior: SnackBarBehavior.floating,
-                          ),
-                        );
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                          recipeRoute,
-                          (route) => false,
-                        );
-                      },
-                      child: const Text(
-                        'Done',
-                        textAlign: TextAlign.right,
-                      )),
-                );
+                    title: const Text('Success'),
+                    content: const Text('Recipe was updated successfully'),
+                    actions: <Widget>[
+                      ElevatedButton(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 5),
+                                  child: const Text('Updated successfully'),
+                                ),
+                                duration: const Duration(
+                                    seconds: 0, milliseconds: 500),
+                                backgroundColor: Colors.green,
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                              recipeRoute,
+                              (route) => false,
+                            );
+                          },
+                          child: const Text("OK"))
+                    ]);
               });
 
           FirebaseFirestore.instance

@@ -22,7 +22,7 @@ class DeleteRecipe {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green, // Background color
               ),
-              child: const Text("yes"),
+              child: const Text("Yes"),
               onPressed: () {
                 FirebaseFirestore.instance
                     .collection('recipe')

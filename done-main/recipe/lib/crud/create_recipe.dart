@@ -6,7 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:recipe/constants/routes.dart';
-import 'package:recipe/page/bottomNav.dart';
 import 'package:recipe/page/profile.dart';
 import 'package:recipe/utilities/showErrorDialog.dart';
 
@@ -103,35 +102,39 @@ class _MyAddPageState extends State<MyAddPage> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: const Text('Created Successfully'),
-                                content: InkWell(
-                                    onTap: () {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 20, vertical: 5),
-                                            child: const Text(
-                                                'Created successfully'),
-                                          ),
-                                          duration: const Duration(
-                                              seconds: 0, milliseconds: 500),
-                                          backgroundColor: Colors.green,
-                                          behavior: SnackBarBehavior.floating,
-                                        ),
-                                      );
-                                      Navigator.of(context)
-                                          .pushNamedAndRemoveUntil(
-                                        recipeRoute,
-                                        (route) => false,
-                                      );
-                                    },
-                                    child: const Text(
-                                      'Done',
-                                      textAlign: TextAlign.right,
-                                    )),
-                              );
+                                  title: const Text('Success'),
+                                  content: const Text(
+                                      'Recipe was created successfully'),
+                                  actions: <Widget>[
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 20,
+                                                        vertical: 5),
+                                                child: const Text(
+                                                    'Created successfully'),
+                                              ),
+                                              duration: const Duration(
+                                                  seconds: 0,
+                                                  milliseconds: 500),
+                                              backgroundColor: Colors.green,
+                                              behavior:
+                                                  SnackBarBehavior.floating,
+                                            ),
+                                          );
+                                          Navigator.of(context)
+                                              .pushNamedAndRemoveUntil(
+                                            recipeRoute,
+                                            (route) => false,
+                                          );
+                                        },
+                                        child: const Text("OK"))
+                                  ]);
                             });
                         UploadTask? uploadTask;
                         var ref = FirebaseStorage.instance

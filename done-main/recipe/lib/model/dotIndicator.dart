@@ -1,7 +1,8 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 
 class Dotindicator extends StatelessWidget {
-  Dotindicator({
+  const Dotindicator({
     Key? key,
     this.isActive = false,
   }) : super(key: key);
@@ -13,7 +14,7 @@ class Dotindicator extends StatelessWidget {
       radius: 10,
       backgroundColor: Colors.white,
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 200),
         height: 15,
         width: 15,
         decoration: BoxDecoration(

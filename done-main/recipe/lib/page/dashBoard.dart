@@ -152,7 +152,7 @@ class _DashBoardState extends State<DashBoard> {
                           }),
                     );
                   } else {
-                    return const Text('no data found');
+                    return const Text('Please create some recipes');
                   }
                 },
               ),
