@@ -9,13 +9,19 @@ class DeleteRecipe {
         return AlertDialog(
           title: const Text("Do you want to delete your receipe? "),
           actions: [
-            MaterialButton(
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red, // Background color
+              ),
               child: const Text("No"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
-            MaterialButton(
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green, // Background color
+              ),
               child: const Text("yes"),
               onPressed: () {
                 FirebaseFirestore.instance

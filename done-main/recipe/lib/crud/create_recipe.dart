@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:recipe/constants/routes.dart';
 import 'package:recipe/page/bottomNav.dart';
 import 'package:recipe/page/profile.dart';
+import 'package:recipe/utilities/showErrorDialog.dart';
 
 XFile? image;
 String? filename;
@@ -49,14 +50,17 @@ class _MyAddPageState extends State<MyAddPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-              recipeRoute,
-              (route) => false,
-            );
-          },
+        leading: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                recipeRoute,
+                (route) => false,
+              );
+            },
+          ),
         ),
         title: const Text('Create Recipe'),
         backgroundColor: const Color.fromARGB(255, 25, 154, 193),
@@ -72,64 +76,72 @@ class _MyAddPageState extends State<MyAddPage> {
                       backgroundColor: Colors.green, // Background color
                     ),
                     onPressed: () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text('Created Successfully'),
-                              content: InkWell(
-                                  onTap: () {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20, vertical: 5),
-                                          child: const Text(
-                                              'Created successfully'),
+                      try {
+                        FirebaseFirestore.instance
+                            .collection('recipe')
+                            .doc(name.text)
+                            .set({
+                          'name': name.text,
+                          'des': des.text,
+                          'email': cc,
+                          'time': time.text,
+                          'ingredients': ing.text,
+                          'step': step.text,
+                          'image': ''
+                        });
+                        UploadTask? uploadTask;
+                        var ref = FirebaseStorage.instance
+                            .ref()
+                            .child('recipe')
+                            .child(name.text);
+                        ref.putFile(File(image!.path));
+                        uploadTask = ref.putFile(File(image!.path));
+                        final snap = await uploadTask.whenComplete(() {});
+                        final urls = await snap.ref.getDownloadURL();
+                        var user = FirebaseFirestore.instance
+                            .collection('recipe')
+                            .doc(name.text);
+                        await user.update({'image': urls});
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Created Successfully'),
+                                content: InkWell(
+                                    onTap: () {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 20, vertical: 5),
+                                            child: const Text(
+                                                'Created successfully'),
+                                          ),
+                                          duration: const Duration(
+                                              seconds: 0, milliseconds: 500),
+                                          backgroundColor: Colors.green,
+                                          behavior: SnackBarBehavior.floating,
                                         ),
-                                        duration: const Duration(
-                                            seconds: 0, milliseconds: 500),
-                                        backgroundColor: Colors.green,
-                                        behavior: SnackBarBehavior.floating,
-                                      ),
-                                    );
-                                    Navigator.of(context)
-                                        .pushNamedAndRemoveUntil(
-                                      recipeRoute,
-                                      (route) => false,
-                                    );
-                                  },
-                                  child: const Text(
-                                    'Done',
-                                    textAlign: TextAlign.right,
-                                  )),
-                            );
-                          });
-                      FirebaseFirestore.instance
-                          .collection('recipe')
-                          .doc(name.text)
-                          .set({
-                        'name': name.text,
-                        'des': des.text,
-                        'email': cc,
-                        'time': time.text,
-                        'ingredients': ing.text,
-                        'step': step.text,
-                        'image': ''
-                      });
-                      UploadTask? uploadTask;
-                      var ref = FirebaseStorage.instance
-                          .ref()
-                          .child('recipe')
-                          .child(name.text);
-                      ref.putFile(File(image!.path));
-                      uploadTask = ref.putFile(File(image!.path));
-                      final snap = await uploadTask.whenComplete(() {});
-                      final urls = await snap.ref.getDownloadURL();
-                      var user = FirebaseFirestore.instance
-                          .collection('recipe')
-                          .doc(name.text);
-                      await user.update({'image': urls});
+                                      );
+                                      Navigator.of(context)
+                                          .pushNamedAndRemoveUntil(
+                                        recipeRoute,
+                                        (route) => false,
+                                      );
+                                    },
+                                    child: const Text(
+                                      'Done',
+                                      textAlign: TextAlign.right,
+                                    )),
+                              );
+                            });
+                      } catch (e) {
+                        showErrorDialog(
+                          context,
+                          'Image and Text field cannot be empty',
+                        );
+                      }
                     },
                     child: const Text('Create',
                         style: TextStyle(color: Colors.white, fontSize: 20)),
@@ -300,7 +312,7 @@ class _MyAddPageState extends State<MyAddPage> {
                     maxLines: 4,
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'Ingredients',
+                      hintText: '250g flour',
                       fillColor: Colors.grey[300],
                       filled: true,
                     ),
@@ -321,7 +333,7 @@ class _MyAddPageState extends State<MyAddPage> {
                     controller: step,
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'Steps',
+                      hintText: 'Mix the flour and water',
                       fillColor: Colors.grey[300],
                       filled: true,
                     ),

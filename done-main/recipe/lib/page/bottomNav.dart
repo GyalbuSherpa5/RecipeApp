@@ -70,7 +70,7 @@ class _MainScreenState extends State<MainScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.dashboard,
+                              Icons.home,
                               color:
                                   currentTab == 0 ? Colors.teal : Colors.grey,
                             ),

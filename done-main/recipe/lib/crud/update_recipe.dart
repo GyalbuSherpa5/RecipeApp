@@ -77,14 +77,17 @@ class _MyAddPageState extends State<MyAddPage> {
     TextEditingController step = TextEditingController(text: widget.step);
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-              recipeRoute,
-              (route) => false,
-            );
-          },
+        leading: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                recipeRoute,
+                (route) => false,
+              );
+            },
+          ),
         ),
         title: const Text('Update Recipe'),
         backgroundColor: const Color.fromARGB(255, 25, 154, 193),
@@ -128,7 +131,7 @@ class _MyAddPageState extends State<MyAddPage> {
                                         color: Colors.grey,
                                         image: DecorationImage(
                                           image: AssetImage(
-                                              'assets/images/user1.png'),
+                                              'assets/images/recipeFoto.jpg'),
                                         )),
                                   )
                                 : Container(

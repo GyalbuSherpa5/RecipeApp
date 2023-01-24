@@ -164,12 +164,15 @@ class IndividualPage extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(18, 18, 10, 10),
-                        child: Text(
-                          ing,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.black),
+                        child: SizedBox(
+                          width: 250,
+                          child: Text(
+                            ing,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.black),
+                          ),
                         ),
                       ),
                     ],
@@ -178,9 +181,11 @@ class IndividualPage extends StatelessWidget {
                   //step
 
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Padding(
-                        padding: EdgeInsets.all(18.0),
+                        padding: EdgeInsets.fromLTRB(20, 18, 10, 120),
                         child: Text(
                           'Steps',
                           style: TextStyle(
@@ -189,13 +194,16 @@ class IndividualPage extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(70, 18, 10, 18),
-                        child: Text(
-                          step,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.black),
+                        padding: const EdgeInsets.fromLTRB(75, 18, 10, 120),
+                        child: SizedBox(
+                          width: 250,
+                          child: Text(
+                            step,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.black),
+                          ),
                         ),
                       ),
                     ],

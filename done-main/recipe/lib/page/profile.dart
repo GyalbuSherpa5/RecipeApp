@@ -157,17 +157,20 @@ class _ProfileState extends State<Profile> {
                       );
                     }),
                 const Spacer(),
-                const Text(
-                  "My recipe : ",
-                  style: TextStyle(
-                    fontFamily: 'CustomFont',
-                    fontSize: 24.0,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2.0,
-                    wordSpacing: 4.0,
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(15, 0, 0, 10),
+                  child: Text(
+                    "My recipe : ",
+                    style: TextStyle(
+                      fontFamily: 'CustomFont',
+                      fontSize: 24.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 2.0,
+                      wordSpacing: 4.0,
+                    ),
+                    textAlign: TextAlign.left,
                   ),
-                  textAlign: TextAlign.left,
                 ),
                 FutureBuilder(
                     future: dataa(),
