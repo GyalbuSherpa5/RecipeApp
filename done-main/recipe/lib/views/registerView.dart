@@ -47,8 +47,18 @@ class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black26,
       body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Colors.teal,
+              Colors.blue,
+              Colors.teal,
+            ],
+          ),
+        ),
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
@@ -127,11 +137,11 @@ class _RegisterViewState extends State<RegisterView> {
             const Spacer(),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.8,
-              child: Text(
+              child: const Text(
                 'By signing up you agree to our Terms of use and Pirvacy Policy',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.grey[300],
+                  color: Colors.white,
                 ),
               ),
             ),
@@ -141,7 +151,7 @@ class _RegisterViewState extends State<RegisterView> {
               height: 50,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14)),
-              color: Colors.orange,
+              color: const Color.fromARGB(255, 244, 173, 66),
               textColor: Colors.white,
               onPressed: () async {
                 final email = _email.text;
@@ -180,10 +190,10 @@ class _RegisterViewState extends State<RegisterView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Already have an account?',
                   style: TextStyle(
-                    color: Colors.grey[300],
+                    color: Colors.white,
                   ),
                 ),
                 TextButton(
@@ -193,7 +203,13 @@ class _RegisterViewState extends State<RegisterView> {
                         (route) => false,
                       );
                     },
-                    child: const Text('Login here!')),
+                    child: const Text(
+                      'Login here!',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.white,
+                      ),
+                    )),
               ],
             ),
             const Spacer()

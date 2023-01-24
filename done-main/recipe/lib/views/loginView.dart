@@ -42,17 +42,50 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Colors.teal,
+              Colors.blue,
+              Colors.teal,
+            ],
+          ),
+        ),
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             const Spacer(),
-            const CustomTitle(
-              text: 'Recipe',
+            SizedBox(
+              height: 220,
+              width: 250,
+              child: Column(
+                children: [
+                  Image.asset(
+                    "assets/images/logo.png",
+                  ),
+                  const Expanded(
+                    child: CustomTitle(
+                      text: 'FoodFolio',
+                    ),
+                  ),
+                ],
+              ),
             ),
-            const CustomTitle(
-              text: 'Log In',
+            const Expanded(
+              child: Text(
+                "Discover and create delicious recipes",
+                style: TextStyle(
+                  fontFamily: 'CustomFont',
+                  fontSize: 17.0,
+                  color: Colors.black87,
+                  letterSpacing: 2.0,
+                  wordSpacing: 4.0,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
             const Spacer(),
             TextField(
@@ -116,7 +149,7 @@ class _LoginViewState extends State<LoginView> {
                 },
                 child: const Text(
                   'Forgot Password ?',
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
@@ -129,7 +162,7 @@ class _LoginViewState extends State<LoginView> {
               height: 50,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14)),
-              color: Colors.orange,
+              color: const Color.fromARGB(255, 244, 173, 66),
               textColor: Colors.white,
               onPressed: () async {
                 final email = _email.text;
@@ -180,10 +213,10 @@ class _LoginViewState extends State<LoginView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Don\'t have an account ? ',
                   style: TextStyle(
-                    color: Colors.grey[300],
+                    color: Colors.white,
                     fontSize: 15,
                   ),
                 ),
@@ -198,6 +231,7 @@ class _LoginViewState extends State<LoginView> {
                     'Sign Up',
                     style: TextStyle(
                       fontSize: 15,
+                      color: Colors.white,
                     ),
                   ),
                 )

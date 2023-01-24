@@ -18,9 +18,9 @@ class _DashBoardState extends State<DashBoard> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          leading: Image.asset("assets/images/logo.png"),
           title: const Text(
-            'Foodfolio',
+            'FoodFolio',
             style: TextStyle(
               fontFamily: 'CustomFont',
               fontSize: 24.0,
