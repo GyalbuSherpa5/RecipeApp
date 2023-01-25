@@ -69,9 +69,9 @@ class IndividualPage extends StatelessWidget {
                   Row(
                     children: [
                       const Padding(
-                        padding: EdgeInsets.all(18.0),
+                        padding: EdgeInsets.fromLTRB(18, 18, 0, 18),
                         child: Text(
-                          'Recipe Name',
+                          'Recipe Name : ',
                           style: TextStyle(
                             fontSize: 20,
                           ),
@@ -97,16 +97,16 @@ class IndividualPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Padding(
-                        padding: EdgeInsets.fromLTRB(18, 0, 10, 10),
+                        padding: EdgeInsets.fromLTRB(18, 0, 0, 10),
                         child: Text(
-                          'Cooking time',
+                          'Cooking time : ',
                           style: TextStyle(
                             fontSize: 20,
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(5, 0, 10, 15),
+                        padding: const EdgeInsets.fromLTRB(0, 0, 10, 15),
                         child: Text(
                           time,
                           style: const TextStyle(
@@ -118,95 +118,124 @@ class IndividualPage extends StatelessWidget {
                     ],
                   ),
                   //des
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.fromLTRB(18, 0, 10, 10),
-                        child: Text(
-                          'Description',
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(25, 0, 10, 10),
-                        child: SizedBox(
-                          width: 250,
+                  IntrinsicHeight(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(18, 0, 10, 10),
                           child: Text(
-                            des,
-                            textAlign: TextAlign.justify,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Colors.black),
+                            'Description',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        const VerticalDivider(
+                          color: Colors.black, //color of divider
+                          width: 10, //width space of divider
+                          thickness: 3, //thickness of divier line
+                          indent: 5, //Spacing at the top of divider.
+                          endIndent: 13, //Spacing at the bottom of divider.
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                          child: SizedBox(
+                            width: 250,
+                            child: Text(
+                              des,
+                              textAlign: TextAlign.justify,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   //ingredients
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(18.0),
-                        child: Text(
-                          'Ingredients',
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(18, 18, 10, 10),
-                        child: SizedBox(
-                          width: 250,
+                  IntrinsicHeight(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(18, 18, 10, 10),
                           child: Text(
-                            ing,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Colors.black),
+                            'Ingredients',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        const VerticalDivider(
+                          color: Colors.black, //color of divider
+                          width: 10, //width space of divider
+                          thickness: 3, //thickness of divier line
+                          indent: 23, //Spacing at the top of divider.
+                          endIndent: 10, //Spacing at the bottom of divider.
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 18, 10, 10),
+                          child: SizedBox(
+                            width: 250,
+                            child: Text(
+                              ing,
+                              textAlign: TextAlign.justify,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
 
                   //step
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.fromLTRB(20, 18, 10, 120),
-                        child: Text(
-                          'Steps',
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(75, 18, 10, 120),
-                        child: SizedBox(
-                          width: 250,
+                  IntrinsicHeight(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(20, 18, 10, 120),
                           child: Text(
-                            step,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Colors.black),
+                            'Steps',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        const VerticalDivider(
+                          color: Colors.black, //color of divider
+                          width: 10, //width space of divider
+                          thickness: 3, //thickness of divier line
+                          indent: 23, //Spacing at the top of divider.
+                          endIndent: 130, //Spacing at the bottom of divider.
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 18, 10, 130),
+                          child: SizedBox(
+                            width: 300,
+                            child: Text(
+                              step,
+                              textAlign: TextAlign.justify,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ]),
           ),
