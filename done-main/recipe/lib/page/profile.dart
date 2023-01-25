@@ -155,7 +155,7 @@ class _ProfileState extends State<Profile> {
                     }),
                 const Spacer(),
                 const Padding(
-                  padding: EdgeInsets.fromLTRB(15, 0, 0, 10),
+                  padding: EdgeInsets.fromLTRB(25, 0, 0, 5),
                   child: Text(
                     "My recipe : ",
                     style: TextStyle(
@@ -171,191 +171,195 @@ class _ProfileState extends State<Profile> {
                 FutureBuilder(
                     future: dataa(),
                     builder: (context, snap) {
-                      return Container(
-                          margin: const EdgeInsets.all(5),
-                          height: MediaQuery.of(context).size.height * 0.35,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: const BoxDecoration(),
-                          child: StreamBuilder(
-                            stream: FirebaseFirestore.instance
-                                .collection('recipe')
-                                .where('email', isEqualTo: snap.data.toString())
-                                .snapshots(),
-                            builder: (context,
-                                AsyncSnapshot<QuerySnapshot> snapshot) {
-                              if (snapshot.hasData) {
-                                return ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    shrinkWrap: true,
-                                    itemCount: snapshot.data!.docs.length,
-                                    itemBuilder: (context, index) {
-                                      return InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  IndividualPage(
-                                                image: snapshot
-                                                    .data!.docs[index]['image'],
-                                                name: snapshot.data!.docs[index]
-                                                    ['name'],
-                                                time: snapshot.data!.docs[index]
-                                                    ['time'],
-                                                des: snapshot.data!.docs[index]
-                                                    ['des'],
-                                                ing: snapshot.data!.docs[index]
-                                                    ['ingredients'],
-                                                step: snapshot.data!.docs[index]
-                                                    ['step'],
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              height: 200,
-                                              width: 170,
-                                              margin: const EdgeInsets.all(7),
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(16),
-                                                image: DecorationImage(
-                                                    image: NetworkImage(
+                      return Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                            margin: const EdgeInsets.all(5),
+                            height: MediaQuery.of(context).size.height * 0.35,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: const BoxDecoration(),
+                            child: StreamBuilder(
+                              stream: FirebaseFirestore.instance
+                                  .collection('recipe')
+                                  .where('email',
+                                      isEqualTo: snap.data.toString())
+                                  .snapshots(),
+                              builder: (context,
+                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                if (snapshot.hasData) {
+                                  return ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      itemCount: snapshot.data!.docs.length,
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    IndividualPage(
+                                                  image: snapshot.data!
+                                                      .docs[index]['image'],
+                                                  name: snapshot.data!
+                                                      .docs[index]['name'],
+                                                  time: snapshot.data!
+                                                      .docs[index]['time'],
+                                                  des: snapshot
+                                                      .data!.docs[index]['des'],
+                                                  ing:
                                                       snapshot.data!.docs[index]
-                                                          ['image'],
-                                                    ),
-                                                    fit: BoxFit.cover),
+                                                          ['ingredients'],
+                                                  step: snapshot.data!
+                                                      .docs[index]['step'],
+                                                ),
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 15.0),
-                                              child: Row(
-                                                children: [
-                                                  SizedBox(
-                                                    width: 130,
-                                                    child: Text(
-                                                      snapshot.data!.docs[index]
-                                                          ['name'],
-                                                      maxLines: 1,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 20),
+                                            );
+                                          },
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                height: 200,
+                                                width: 170,
+                                                margin: const EdgeInsets.all(7),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(16),
+                                                  image: DecorationImage(
+                                                      image: NetworkImage(
+                                                        snapshot.data!
+                                                                .docs[index]
+                                                            ['image'],
+                                                      ),
+                                                      fit: BoxFit.cover),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 15.0),
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width: 130,
+                                                      child: Text(
+                                                        snapshot.data!
+                                                                .docs[index]
+                                                            ['name'],
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: const TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 20),
+                                                      ),
                                                     ),
-                                                  ),
-                                                  PopupMenuButton<int>(
-                                                    itemBuilder: (context) => [
-                                                      PopupMenuItem(
-                                                        value: 1,
-                                                        child: Row(
-                                                          children: const [
-                                                            Icon(
-                                                              Icons.delete,
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      240,
-                                                                      112,
-                                                                      103),
-                                                            ),
-                                                            SizedBox(
-                                                              width: 10,
-                                                            ),
-                                                            Text(
-                                                                "Delete your recipe")
-                                                          ],
+                                                    PopupMenuButton<int>(
+                                                      itemBuilder: (context) =>
+                                                          [
+                                                        PopupMenuItem(
+                                                          value: 1,
+                                                          child: Row(
+                                                            children: const [
+                                                              Icon(
+                                                                Icons.delete,
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        240,
+                                                                        112,
+                                                                        103),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              Text(
+                                                                  "Delete your recipe")
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
-                                                      PopupMenuItem(
-                                                        value: 2,
-                                                        child: Row(
-                                                          children: const [
-                                                            Icon(
-                                                              Icons.edit,
-                                                              color:
-                                                                  Colors.blue,
-                                                            ),
-                                                            SizedBox(
-                                                              width: 10,
-                                                            ),
-                                                            Text(
-                                                                "Edit your recipe")
-                                                          ],
+                                                        PopupMenuItem(
+                                                          value: 2,
+                                                          child: Row(
+                                                            children: const [
+                                                              Icon(
+                                                                Icons.edit,
+                                                                color:
+                                                                    Colors.blue,
+                                                              ),
+                                                              SizedBox(
+                                                                width: 10,
+                                                              ),
+                                                              Text(
+                                                                  "Edit your recipe")
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],
-                                                    offset: const Offset(0, 50),
-                                                    color: Colors.white,
-                                                    elevation: 2,
-                                                    onSelected: (value) {
-                                                      if (value == 1) {
-                                                        DeleteRecipe(
-                                                          context,
-                                                          title: snapshot.data!
-                                                                  .docs[index]
-                                                              ['name'],
-                                                        );
-                                                      }
-                                                      if (value == 2) {
-                                                        Navigator.push(
+                                                      ],
+                                                      offset:
+                                                          const Offset(0, 50),
+                                                      color: Colors.white,
+                                                      elevation: 2,
+                                                      onSelected: (value) {
+                                                        if (value == 1) {
+                                                          DeleteRecipe(
                                                             context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        EditRecipe(
-                                                                          name: snapshot
-                                                                              .data!
-                                                                              .docs[index]['name'],
-                                                                          des: snapshot
-                                                                              .data!
-                                                                              .docs[index]['des'],
-                                                                          time: snapshot
-                                                                              .data!
-                                                                              .docs[index]['time'],
-                                                                          step: snapshot
-                                                                              .data!
-                                                                              .docs[index]['step'],
-                                                                          ingredients: snapshot
-                                                                              .data!
-                                                                              .docs[index]['ingredients'],
-                                                                          image: snapshot
-                                                                              .data!
-                                                                              .docs[index]['image'],
-                                                                        )));
-                                                      }
-                                                    },
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      );
-                                    });
-                              } else {
-                                return const Text(
-                                  'Please create some recipe',
-                                  style: TextStyle(
-                                    fontSize: 24.0,
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 2.0,
-                                    wordSpacing: 4.0,
-                                  ),
-                                );
-                              }
-                            },
-                          ));
+                                                            title: snapshot
+                                                                    .data!
+                                                                    .docs[index]
+                                                                ['name'],
+                                                          );
+                                                        }
+                                                        if (value == 2) {
+                                                          Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          EditRecipe(
+                                                                            name:
+                                                                                snapshot.data!.docs[index]['name'],
+                                                                            des:
+                                                                                snapshot.data!.docs[index]['des'],
+                                                                            time:
+                                                                                snapshot.data!.docs[index]['time'],
+                                                                            step:
+                                                                                snapshot.data!.docs[index]['step'],
+                                                                            ingredients:
+                                                                                snapshot.data!.docs[index]['ingredients'],
+                                                                            image:
+                                                                                snapshot.data!.docs[index]['image'],
+                                                                          )));
+                                                        }
+                                                      },
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        );
+                                      });
+                                } else {
+                                  return const Text(
+                                    'Please create some recipe',
+                                    style: TextStyle(
+                                      fontSize: 24.0,
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 2.0,
+                                      wordSpacing: 4.0,
+                                    ),
+                                  );
+                                }
+                              },
+                            )),
+                      );
                     }),
                 const Spacer(),
                 const Spacer(),

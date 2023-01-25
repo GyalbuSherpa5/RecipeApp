@@ -57,7 +57,7 @@ class _DashBoardState extends State<DashBoard> {
               const SizedBox(
                 height: 40,
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(25, 0, 10, 10),
+                  padding: EdgeInsets.fromLTRB(30, 0, 10, 5),
                   child: Text('ALL RECIPES',
                       textAlign: TextAlign.left,
                       style: TextStyle(
@@ -78,7 +78,7 @@ class _DashBoardState extends State<DashBoard> {
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasData) {
                     return Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 0, 10),
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 10),
                       child: GridView.builder(
                           shrinkWrap: true,
                           itemCount: snapshot.data!.docs.length,
