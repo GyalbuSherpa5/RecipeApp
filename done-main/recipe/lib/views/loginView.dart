@@ -78,7 +78,6 @@ class _LoginViewState extends State<LoginView> {
               child: Text(
                 "Discover and create delicious recipes",
                 style: TextStyle(
-                  fontFamily: 'CustomFont',
                   fontSize: 17.0,
                   color: Colors.black87,
                   letterSpacing: 2.0,

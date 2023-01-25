@@ -42,50 +42,37 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: const Icon(Icons.person_rounded),
+          titleSpacing: 0,
           title: const Text(
             'User Profile',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           backgroundColor: const Color.fromARGB(255, 25, 154, 193),
           actions: [
-            const Center(
-                child: Text(
-              "Sign Out",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15,
-              ),
-            )),
-            PopupMenuButton<MenuAction>(
-              icon: const Icon(Icons.logout_sharp),
-              onSelected: (value) async {
-                switch (value) {
-                  case MenuAction.logout:
-                    final shouldLogout = await showLogOutDialog(context);
-                    if (shouldLogout) {
-                      await FirebaseAuth.instance.signOut();
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        loginRoute,
-                        (_) => false,
-                      );
-                    }
-                }
-              },
-              itemBuilder: (context) {
-                return const [
-                  PopupMenuItem<MenuAction>(
-                    value: MenuAction.logout,
-                    child: Text(
-                      'Sign out',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          color: Colors.black),
+            const Icon(Icons.logout_rounded),
+            TextButton(
+                onPressed: () async {
+                  final shouldLogout = await showLogOutDialog(context);
+                  if (shouldLogout) {
+                    await FirebaseAuth.instance.signOut();
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      loginRoute,
+                      (_) => false,
+                    );
+                  }
+                },
+                child: const Padding(
+                  padding: EdgeInsets.fromLTRB(0, 8, 8, 8),
+                  child: Text(
+                    "Sign Out",
+                    style: TextStyle(
+                      fontSize: 17.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ];
-              },
-            )
+                ))
           ],
         ),
         body: Container(
@@ -109,7 +96,6 @@ class _ProfileState extends State<Profile> {
                 const Center(
                   child: Text("Welcome User:",
                       style: TextStyle(
-                        fontFamily: 'CustomFont',
                         fontSize: 24.0,
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -155,7 +141,6 @@ class _ProfileState extends State<Profile> {
                               child: Text(
                                 'No user found',
                                 style: TextStyle(
-                                  fontFamily: 'CustomFont',
                                   fontSize: 24.0,
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold,
@@ -174,7 +159,6 @@ class _ProfileState extends State<Profile> {
                   child: Text(
                     "My recipe : ",
                     style: TextStyle(
-                      fontFamily: 'CustomFont',
                       fontSize: 24.0,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -362,7 +346,6 @@ class _ProfileState extends State<Profile> {
                                 return const Text(
                                   'Please create some recipe',
                                   style: TextStyle(
-                                    fontFamily: 'CustomFont',
                                     fontSize: 24.0,
                                     color: Colors.grey,
                                     fontWeight: FontWeight.bold,

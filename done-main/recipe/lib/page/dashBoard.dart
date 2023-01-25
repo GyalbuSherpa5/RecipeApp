@@ -19,15 +19,19 @@ class _DashBoardState extends State<DashBoard> {
     return Scaffold(
         appBar: AppBar(
           leading: Image.asset("assets/images/logo.png"),
-          title: const Text(
-            'FoodFolio',
-            style: TextStyle(
-              fontFamily: 'CustomFont',
-              fontSize: 24.0,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 2.0,
-              wordSpacing: 4.0,
+          leadingWidth: 80,
+          titleSpacing: 0,
+          title: const Padding(
+            padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
+            child: Text(
+              'FoodFolio',
+              style: TextStyle(
+                fontSize: 24.0,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 2.0,
+                wordSpacing: 4.0,
+              ),
             ),
           ),
           backgroundColor: const Color.fromARGB(255, 25, 154, 193),
@@ -57,7 +61,6 @@ class _DashBoardState extends State<DashBoard> {
                   child: Text('ALL RECIPES',
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                        fontFamily: 'Proxima Nova',
                         fontSize: 27.0,
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
